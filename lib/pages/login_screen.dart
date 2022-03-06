@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:movieticketbookingapp/controllers/auth_controller.dart';
 import 'package:movieticketbookingapp/pages/signup_screen.dart';
 import 'package:movieticketbookingapp/utils/mytheme.dart';
 import 'package:movieticketbookingapp/utils/social_buttons.dart';
@@ -14,6 +16,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
@@ -72,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: emailController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -87,6 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: TextFormField(
+                        controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -111,7 +117,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        AuthController.instance.login(emailController.text.trim(), passwordController.text.trim());
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Mytheme.splash,
                         shape: RoundedRectangleBorder(
@@ -156,7 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15, bottom: 15),
-                      child: SocialLoginButtons(onFbClick: () {}, onGoogleClick: () {}),
+                      child: SocialLoginButtons(
+                          onFbClick: () {},
+                          onGoogleClick: () {
+                            AuthController.instance.googleLogin();
+                          }),
                     ),
                   ],
                 ),
@@ -173,7 +185,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: const TextStyle(decoration: TextDecoration.underline, fontWeight: FontWeight.w700),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => SignUpScreen()));
+                          //Navigator.push(context, MaterialPageRoute(builder: (_) => SignUpScreen()));
+                          Get.to(SignUpScreen());
                         },
                     ),
                     const TextSpan(

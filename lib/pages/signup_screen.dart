@@ -2,6 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:movieticketbookingapp/controllers/auth_controller.dart';
+import 'package:movieticketbookingapp/controllers/input_validators.dart';
 import 'package:movieticketbookingapp/utils/mytheme.dart';
 import 'package:movieticketbookingapp/utils/social_buttons.dart';
 
@@ -13,6 +16,11 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final cnfPassController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
@@ -54,6 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: nameController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -69,6 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: TextFormField(
+                        controller: emailController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -84,6 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: TextFormField(
+                        controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -100,6 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: TextFormField(
+                        controller: cnfPassController,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -114,7 +126,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (InputValidator.validateField("Name", nameController.text.trim()) &&
+                            InputValidator.validateField("Email", emailController.text.trim())) {
+                          if (InputValidator.validatePassword(passwordController.text, cnfPassController.text)) {
+                            AuthController.instance
+                                .registerUser(emailController.text.trim(), passwordController.text.trim());
+                          }
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Mytheme.splash,
                         shape: RoundedRectangleBorder(
@@ -125,7 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Padding(
                           padding: EdgeInsets.all(12),
                           child: Text(
-                            "LOGIN",
+                            "SIGNUP",
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
@@ -176,7 +196,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: const TextStyle(decoration: TextDecoration.underline, fontWeight: FontWeight.w700),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.pop(context);
+                          Get.back();
                         },
                     ),
                     const TextSpan(

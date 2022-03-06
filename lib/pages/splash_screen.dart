@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movieticketbookingapp/controllers/auth_controller.dart';
 import 'package:movieticketbookingapp/pages/login_screen.dart';
 import 'package:movieticketbookingapp/utils/mytheme.dart';
 
@@ -22,10 +23,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1000));
     _animation = CurvedAnimation(parent: _animationController, curve: Curves.bounceOut, reverseCurve: Curves.bounceIn);
     _animationController.forward();
-
-    Timer(const Duration(milliseconds: 2500),
-        () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => LoginScreen())));
-
     super.initState();
   }
 
