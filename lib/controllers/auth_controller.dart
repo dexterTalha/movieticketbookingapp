@@ -40,6 +40,7 @@ class AuthController extends GetxController {
       isLoging = true;
       update();
       await auth.createUserWithEmailAndPassword(email: email, password: password);
+      getSuccessSnackBar("Successfully logged in as ${_user.value!.email}");
     } on FirebaseAuthException catch (e) {
       //define error
       getErrorSnackBar("Account Creating Failed", e);
@@ -51,6 +52,7 @@ class AuthController extends GetxController {
       isLoging = true;
       update();
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      getSuccessSnackBar("Successfully logged in as ${_user.value!.email}");
     } on FirebaseAuthException catch (e) {
       //define error
       getErrorSnackBar("Login Failed", e);
@@ -73,9 +75,19 @@ class AuthController extends GetxController {
           idToken: googleAuth?.idToken,
         );
         await auth.signInWithCredential(crendentials);
+        getSuccessSnackBar("Successfully logged in as ${_user.value!.email}");
       }
     } on FirebaseAuthException catch (e) {
       getErrorSnackBar("Google Login Failed", e);
+    }
+  }
+
+  void forgorPassword(email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      getSuccessSnackBar("Reset mail sent successfully. Check mail!");
+    } catch (e) {
+      getErrorSnackBar("Error", e);
     }
   }
 
@@ -84,7 +96,19 @@ class AuthController extends GetxController {
       "Error",
       "$message\n${_.message}",
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Mytheme.redBorder,
+      backgroundColor: Mytheme.redTextColor,
+      colorText: Colors.white,
+      borderRadius: 10,
+      margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+    );
+  }
+
+  getSuccessSnackBar(String message) {
+    Get.snackbar(
+      "Success",
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Mytheme.greenTextColor,
       colorText: Colors.white,
       borderRadius: 10,
       margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
