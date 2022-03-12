@@ -14,10 +14,10 @@ class SocialLoginButtons extends StatelessWidget {
       children: [
         Expanded(
           child: Material(
-            color: Mytheme.redLight,
+            color: MyTheme.redLight,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
-              side: const BorderSide(color: Mytheme.redBorder, width: 0.2),
+              side: const BorderSide(color: MyTheme.redBorder, width: 0.2),
             ),
             child: InkWell(
               onTap: onGoogleClick,
@@ -49,10 +49,10 @@ class SocialLoginButtons extends StatelessWidget {
         ),
         Expanded(
           child: Material(
-            color: Mytheme.blueLight,
+            color: MyTheme.blueLight,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
-              side: const BorderSide(color: Mytheme.blueBorder, width: 0.2),
+              side: const BorderSide(color: MyTheme.blueBorder, width: 0.2),
             ),
             child: InkWell(
               onTap: onFbClick,

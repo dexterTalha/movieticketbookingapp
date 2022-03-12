@@ -1,11 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movieticketbookingapp/controllers/auth_controller.dart';
-import 'package:movieticketbookingapp/pages/login_screen.dart';
-import 'package:movieticketbookingapp/utils/mytheme.dart';
+import '../utils/mytheme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -36,14 +32,14 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return Scaffold(
-      backgroundColor: Mytheme.splash,
+      backgroundColor: MyTheme.splash,
       body: Container(
         child: Center(
           child: ScaleTransition(
             scale: _animation,
             child: SvgPicture.asset(
               "assets/icons/splash_icon.svg",
-              height: 60,
+              height: 70,
             ),
           ),
         ),

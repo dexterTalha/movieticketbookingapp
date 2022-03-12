@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movieticketbookingapp/pages/home_screen.dart';
@@ -11,6 +12,7 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user;
   bool isLoging = false;
+  User? get user => _user.value;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
@@ -79,6 +81,8 @@ class AuthController extends GetxController {
       }
     } on FirebaseAuthException catch (e) {
       getErrorSnackBar("Google Login Failed", e);
+    } on PlatformException catch (e) {
+      getErrorSnackBar("Google Login Failed", e);
     }
   }
 
@@ -86,7 +90,7 @@ class AuthController extends GetxController {
     try {
       await auth.sendPasswordResetEmail(email: email);
       getSuccessSnackBar("Reset mail sent successfully. Check mail!");
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       getErrorSnackBar("Error", e);
     }
   }
@@ -96,7 +100,7 @@ class AuthController extends GetxController {
       "Error",
       "$message\n${_.message}",
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Mytheme.redTextColor,
+      backgroundColor: MyTheme.redTextColor,
       colorText: Colors.white,
       borderRadius: 10,
       margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
@@ -108,7 +112,7 @@ class AuthController extends GetxController {
       "Success",
       message,
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Mytheme.greenTextColor,
+      backgroundColor: MyTheme.greenTextColor,
       colorText: Colors.white,
       borderRadius: 10,
       margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),

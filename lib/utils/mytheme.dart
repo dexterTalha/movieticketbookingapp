@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Mytheme {
+class MyTheme {
   static const splash = Color(0xFFE81667);
   static const statusBar = Color(0xFF2E3147);
   static const appBarColor = Color(0xFF222539);
@@ -25,6 +25,9 @@ class Mytheme {
   static final myLightTheme = ThemeData(
     primaryColor: splash,
     scaffoldBackgroundColor: Colors.white,
+    textTheme: TextTheme(
+      subtitle1: TextStyle(color: Colors.white.withOpacity(0.7), inherit: true),
+    ),
     brightness: Brightness.light,
     backgroundColor: Colors.white,
     fontFamily: 'Poppins',
