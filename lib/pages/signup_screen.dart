@@ -26,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final Size _size = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return Scaffold(
-      backgroundColor: Mytheme.splash,
+      backgroundColor: MyTheme.splash,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
@@ -55,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       "Create your account",
                       style: TextStyle(
                         fontSize: 16,
-                        color: Mytheme.splash,
+                        color: MyTheme.splash,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -70,7 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           hintText: "Name",
                           hintStyle: const TextStyle(color: Colors.black45),
-                          fillColor: Mytheme.greyColor,
+                          fillColor: MyTheme.greyColor,
                           filled: true,
                         ),
                       ),
@@ -86,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           hintText: "Email Address",
                           hintStyle: const TextStyle(color: Colors.black45),
-                          fillColor: Mytheme.greyColor,
+                          fillColor: MyTheme.greyColor,
                           filled: true,
                         ),
                       ),
@@ -103,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           hintText: "Password",
                           hintStyle: const TextStyle(color: Colors.black45),
-                          fillColor: Mytheme.greyColor,
+                          fillColor: MyTheme.greyColor,
                           filled: true,
                         ),
                       ),
@@ -120,7 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           hintText: "Confirm Password",
                           hintStyle: const TextStyle(color: Colors.black45),
-                          fillColor: Mytheme.greyColor,
+                          fillColor: MyTheme.greyColor,
                           filled: true,
                         ),
                       ),
@@ -136,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Mytheme.splash,
+                        primary: MyTheme.splash,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),

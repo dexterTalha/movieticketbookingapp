@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:movieticketbookingapp/controllers/auth_controller.dart';
-import 'package:movieticketbookingapp/pages/signup_screen.dart';
-import 'package:movieticketbookingapp/utils/mytheme.dart';
-import 'package:movieticketbookingapp/utils/social_buttons.dart';
+import '../controllers/auth_controller.dart';
+import '../pages/signup_screen.dart';
+import '../utils/mytheme.dart';
+import '../utils/social_buttons.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -24,10 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
     final Size _size = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return Scaffold(
-      backgroundColor: Mytheme.splash,
+      backgroundColor: MyTheme.splash,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
+          color: Colors.transparent,
           height: _size.height,
           width: _size.width,
           child: Column(
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Login to your account",
                       style: TextStyle(
                         fontSize: 16,
-                        color: Mytheme.splash,
+                        color: MyTheme.splash,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -85,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           hintText: "Username",
                           hintStyle: const TextStyle(color: Colors.black45),
-                          fillColor: Mytheme.greyColor,
+                          fillColor: MyTheme.greyColor,
                           filled: true,
                         ),
                       ),
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           hintText: "Password",
                           hintStyle: const TextStyle(color: Colors.black45),
-                          fillColor: Mytheme.greyColor,
+                          fillColor: MyTheme.greyColor,
                           filled: true,
                         ),
                       ),
@@ -122,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 hintText: "Email address",
                                 hintStyle: const TextStyle(color: Colors.black45),
-                                fillColor: Mytheme.greyColor,
+                                fillColor: MyTheme.greyColor,
                                 filled: true,
                               ),
                             ),
@@ -140,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Get.back();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Mytheme.splash,
+                                primary: MyTheme.splash,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
                                 ),
@@ -168,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         AuthController.instance.login(emailController.text.trim(), passwordController.text.trim());
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Mytheme.splash,
+                        primary: MyTheme.splash,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -234,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           //Navigator.push(context, MaterialPageRoute(builder: (_) => SignUpScreen()));
-                          Get.to(SignUpScreen());
+                          Get.to(const SignUpScreen());
                         },
                     ),
                     const TextSpan(
