@@ -79,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.only(top: 15),
                       child: TextFormField(
                         controller: emailController,
+                        style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -96,6 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: TextFormField(
                         controller: passwordController,
                         obscureText: true,
+                        style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -115,6 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Get.defaultDialog(
                             title: "Forgort Password?",
                             content: TextFormField(
+                              style: const TextStyle(color: Colors.black),
                               controller: forgotEmailController,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(

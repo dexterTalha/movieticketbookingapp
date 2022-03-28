@@ -1,17 +1,21 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:movieticketbookingapp/controllers/auth_controller.dart';
-import 'package:movieticketbookingapp/utils/custom_slider.dart';
-import 'package:movieticketbookingapp/utils/dummy_data.dart';
-import 'package:movieticketbookingapp/utils/event_items.dart';
-import 'package:movieticketbookingapp/utils/menu_item.dart';
-import 'package:movieticketbookingapp/utils/movies_item.dart';
-import 'package:movieticketbookingapp/utils/mytheme.dart';
+import 'package:movieticketbookingapp/pages/profile_screen.dart';
+import '../controllers/auth_controller.dart';
+import '../utils/custom_slider.dart';
+import '../utils/dummy_data.dart';
+import '../utils/event_items.dart';
+import '../utils/menu_item.dart';
+import '../utils/movies_item.dart';
+import '../utils/mytheme.dart';
 
 import '../utils/constants.dart';
 
@@ -50,13 +54,18 @@ class _HomeScreenState extends State<HomeScreen> {
           child: AppBar(
             leading: Padding(
               padding: const EdgeInsets.only(left: 8, top: 8),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: picUrl,
-                  height: 60,
-                  width: 60,
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const ProfileScreen());
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: picUrl,
+                    height: 60,
+                    width: 60,
+                  ),
                 ),
               ),
             ),
@@ -66,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Name"),
+                  Text(AuthController.instance.user!.displayName ?? "Name"),
                   DropdownButton<String>(
                     value: city,
                     dropdownColor: MyTheme.statusBar,
@@ -126,13 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20.0, top: 20),
+                  padding: const EdgeInsets.only(left: 20.0, top: 20),
                   child: Text(
                     "SEAT CATEGORIES",
                     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.8)),
                   ),
                 ),
-                MenuItem(),
+                const MenuItem(),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0, top: 10),
                   child: Text(
@@ -140,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.8)),
                   ),
                 ),
-                MoviesItems(),
+                const MoviesItems(),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0, top: 10, right: 20),
                   child: Row(
@@ -166,6 +175,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: GoogleMap(
                     mapType: MapType.normal,
                     initialCameraPosition: _kGooglePlex,
+                    gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+                      Factory<OneSequenceGestureRecognizer>(
+                        () => EagerGestureRecognizer(),
+                      )
+                    ].toSet(),
                     onMapCreated: (GoogleMapController controller) {
                       //_controller.complete(controller);
                     },

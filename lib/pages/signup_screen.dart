@@ -62,6 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        style: const TextStyle(color: Colors.black),
                         controller: nameController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -78,6 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: TextFormField(
+                        style: const TextStyle(color: Colors.black),
                         controller: emailController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -94,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: TextFormField(
+                        style: const TextStyle(color: Colors.black),
                         controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -111,6 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: TextFormField(
+                        style: const TextStyle(color: Colors.black),
                         controller: cnfPassController,
                         obscureText: true,
                         decoration: InputDecoration(
