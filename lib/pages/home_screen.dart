@@ -175,11 +175,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: GoogleMap(
                     mapType: MapType.normal,
                     initialCameraPosition: _kGooglePlex,
-                    gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+                    gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
                       Factory<OneSequenceGestureRecognizer>(
                         () => EagerGestureRecognizer(),
                       )
-                    ].toSet(),
+                    },
                     onMapCreated: (GoogleMapController controller) {
                       //_controller.complete(controller);
                     },

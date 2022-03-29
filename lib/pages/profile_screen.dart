@@ -14,15 +14,20 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProviderStateMixin {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final mobileController = TextEditingController();
+  late AnimationController _animationController;
+  late Animation<Offset> _animationImage, _animationCamera;
 
   @override
   void initState() {
     super.initState();
     Get.put(ProfileController());
+    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
+    _animationImage = Tween<Offset>(begin: Offset.zero, end: const Offset(0.0, -0.4)).animate(_animationController);
+    _animationCamera = Tween<Offset>(begin: Offset.zero, end: const Offset(0.0, -1.1)).animate(_animationController);
   }
 
   @override
@@ -47,25 +52,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
         width: double.maxFinite,
         child: Stack(
           children: [
-            Container(
-              height: 150,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                color: MyTheme.appBarColor,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 250),
+            NotificationListener<ScrollNotification>(
+              onNotification: (notification) {
+                if (notification.metrics.pixels == notification.metrics.maxScrollExtent) {
+                  _animationController.forward();
+                } else if (notification.metrics.pixels == notification.metrics.minScrollExtent * 0.5) {
+                  _animationController.reverse();
+                }
+                print(notification.metrics.pixels);
+                return true;
+              },
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Container(
+                      height: 150,
+                      width: double.maxFinite,
+                      decoration: const BoxDecoration(
+                        color: MyTheme.appBarColor,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(30),
+                          bottomLeft: Radius.circular(30),
+                        ),
+                      ),
+                    ),
                     const SizedBox(
-                      height: 10,
+                      height: 60,
                     ),
                     const Padding(
                       padding: EdgeInsets.only(left: 70.0),
@@ -246,6 +259,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
               ),
@@ -253,19 +269,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Positioned(
               top: 90,
               left: MediaQuery.of(context).size.width * 0.5 - 60,
-              child: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 3),
-                    borderRadius: BorderRadius.circular(60),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(60),
-                    child: CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: picUrl,
-                      height: 120,
-                      width: 120,
+              child: SlideTransition(
+                position: _animationImage,
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 3),
+                      borderRadius: BorderRadius.circular(60),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(60),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: picUrl,
+                        height: 120,
+                        width: 120,
+                      ),
                     ),
                   ),
                 ),
@@ -274,16 +293,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Positioned(
               top: 170,
               left: MediaQuery.of(context).size.width * 0.5 + 20,
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: MyTheme.appBarColor,
-                ),
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Colors.white,
+              child: SlideTransition(
+                position: _animationCamera,
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: MyTheme.appBarColor,
+                  ),
+                  child: const Icon(
+                    Icons.camera_alt,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             )
