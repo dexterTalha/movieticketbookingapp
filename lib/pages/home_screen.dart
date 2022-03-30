@@ -8,7 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:movieticketbookingapp/controllers/location_controller.dart';
 import 'package:movieticketbookingapp/pages/profile_screen.dart';
+import 'package:movieticketbookingapp/pages/select_location_screen.dart';
 import '../controllers/auth_controller.dart';
 import '../utils/custom_slider.dart';
 import '../utils/dummy_data.dart';
@@ -34,6 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
@@ -76,25 +83,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(AuthController.instance.user!.displayName ?? "Name"),
-                  DropdownButton<String>(
-                    value: city,
-                    dropdownColor: MyTheme.statusBar,
-                    isDense: true,
-                    icon: Icon(Icons.keyboard_arrow_down, color: Colors.white.withOpacity(0.7)),
-                    items: cities
-                        .map(
-                          (e) => DropdownMenuItem<String>(
-                            value: e,
-                            child: Text(e),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (st) {
-                      setState(() {
-                        city = st!;
-                      });
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const SelectionLocationScreen());
                     },
+                    child: Row(
+                      children: [
+                        Obx(
+                          () => Text(
+                            LocationController.instance.city.value,
+                            style: TextStyle(color: Colors.white.withOpacity(0.7), inherit: true, fontSize: 14),
+                          ),
+                        ),
+                        Icon(Icons.keyboard_arrow_down, color: Colors.white.withOpacity(0.7)),
+                      ],
+                    ),
                   ),
+                  // DropdownButton<String>(
+                  //   value: city,
+                  //   dropdownColor: MyTheme.statusBar,
+                  //   isDense: true,
+                  //   icon: Icon(Icons.keyboard_arrow_down, color: Colors.white.withOpacity(0.7)),
+                  //   items: cities
+                  //       .map(
+                  //         (e) => DropdownMenuItem<String>(
+                  //           value: e,
+                  //           child: Text(e),
+                  //         ),
+                  //       )
+                  //       .toList(),
+                  //   onChanged: (st) {
+                  //     setState(() {
+                  //       city = st!;
+                  //     });
+                  //   },
+                  // ),
                 ],
               ),
             ),

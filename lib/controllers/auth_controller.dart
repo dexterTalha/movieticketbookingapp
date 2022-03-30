@@ -107,6 +107,18 @@ class AuthController extends GetxController {
     );
   }
 
+  getErrorSnackBarNew(String message) {
+    Get.snackbar(
+      "Error",
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: MyTheme.redTextColor,
+      colorText: Colors.white,
+      borderRadius: 10,
+      margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+    );
+  }
+
   getSuccessSnackBar(String message) {
     Get.snackbar(
       "Success",
