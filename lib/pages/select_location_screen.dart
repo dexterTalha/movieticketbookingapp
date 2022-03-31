@@ -24,7 +24,7 @@ class _SelectionLocationScreenState extends State<SelectionLocationScreen> {
     padding: const EdgeInsets.only(top: 20),
     child: GestureDetector(
       onTap: () async {
-        LocationController.instance.setIsLocating(true);
+        LocationController.instance.isLocating(true);
         await LocationController.instance.getLocation();
 
         Get.offAll(() => HomeScreen());
