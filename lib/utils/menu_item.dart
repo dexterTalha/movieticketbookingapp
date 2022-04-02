@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:movieticketbookingapp/pages/view_all_screen.dart';
 import 'package:movieticketbookingapp/utils/dummy_data.dart';
 
 class MenuItem extends StatelessWidget {
@@ -20,6 +22,8 @@ class MenuItem extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 print(menus[i].name);
+                //sending argument to next page
+                Get.to(() => ViewAllScreen(), arguments: menus[i]);
               },
               child: Column(
                 children: [
