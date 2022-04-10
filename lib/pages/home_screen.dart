@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:movieticketbookingapp/controllers/location_controller.dart';
+import 'package:movieticketbookingapp/controllers/shared_pref.dart';
 import 'package:movieticketbookingapp/pages/profile_screen.dart';
 import 'package:movieticketbookingapp/pages/select_location_screen.dart';
 import '../controllers/auth_controller.dart';
@@ -39,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    SharedPref.getLocation().then((value) => LocationController.instance.setCity(value));
     super.initState();
   }
 
@@ -99,25 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  // DropdownButton<String>(
-                  //   value: city,
-                  //   dropdownColor: MyTheme.statusBar,
-                  //   isDense: true,
-                  //   icon: Icon(Icons.keyboard_arrow_down, color: Colors.white.withOpacity(0.7)),
-                  //   items: cities
-                  //       .map(
-                  //         (e) => DropdownMenuItem<String>(
-                  //           value: e,
-                  //           child: Text(e),
-                  //         ),
-                  //       )
-                  //       .toList(),
-                  //   onChanged: (st) {
-                  //     setState(() {
-                  //       city = st!;
-                  //     });
-                  //   },
-                  // ),
                 ],
               ),
             ),

@@ -62,7 +62,13 @@ class _SelectionLocationScreenState extends State<SelectionLocationScreen> {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: Colors.black45, width: 1),
         ),
-        child: Center(child: Text(city)),
+        child: Center(
+          child: Text(
+            city,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
+        ),
       );
 
   @override
@@ -108,7 +114,7 @@ class _SelectionLocationScreenState extends State<SelectionLocationScreen> {
                           itemBuilder: (_, index) => GestureDetector(
                             onTap: () {
                               LocationController.instance.setCity(cities[index]);
-                              Get.offAll(() => HomeScreen());
+                              Get.offAll(() => const HomeScreen());
                             },
                             child: suggestedLocation(
                               cities[index],

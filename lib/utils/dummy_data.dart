@@ -1,4 +1,8 @@
+import 'package:movieticketbookingapp/model/crew_cast_model.dart';
 import 'package:movieticketbookingapp/model/movie_model.dart';
+import 'package:movieticketbookingapp/model/offer_model.dart';
+import 'package:movieticketbookingapp/utils/mytheme.dart';
+import 'package:movieticketbookingapp/widgets/cast_crew_block.dart';
 
 import '../model/ad_slider_model.dart';
 import '../model/event_model.dart';
@@ -18,6 +22,28 @@ List<MenuModel> menus = [
   MenuModel(name: "Sports", asset: "assets/icons/running.svg"),
   MenuModel(name: "Activity", asset: "assets/icons/flag.svg"),
   MenuModel(name: "Monum", asset: "assets/icons/pyramid.svg"),
+];
+
+List<OfferModel> offers = [
+  OfferModel(
+    title: "Wait ! Grab FREE reward",
+    description: "Book your seats and tap on the reward box to claim it.",
+    expiry: DateTime(2022, 4, 15, 12),
+    startTime: DateTime(2022, 3, 15, 12),
+    discount: 100,
+    color: MyTheme.redTextColor,
+    gradientColor: MyTheme.redGiftGradientColors,
+  ),
+  OfferModel(
+    title: "Wait ! Grab FREE reward",
+    description: "Book your seats and tap on the reward box to claim it.",
+    expiry: DateTime(2022, 4, 15, 12),
+    startTime: DateTime(2022, 3, 15, 12),
+    discount: 100,
+    color: MyTheme.greenTextColor,
+    gradientColor: MyTheme.greenGiftGradientColors,
+    icon: "gift_green.svg",
+  ),
 ];
 
 List<MovieModel> movies = [
@@ -53,26 +79,26 @@ List<MovieModel> movies = [
 
 List<EventModel> events = [
   EventModel(
-    title: "Bigil",
-    description: "description",
+    title: "Happy Halloween 2K19",
+    description: "Music show",
     date: "date",
     bannerUrl: "assets/events/event1.png",
   ),
   EventModel(
-    title: "Kaithi",
-    description: "description",
+    title: "Music DJ king monger Sert...",
+    description: "Music show",
     date: "date",
     bannerUrl: "assets/events/event2.png",
   ),
   EventModel(
-    title: "Asuran",
-    description: "description",
+    title: "Summer sounds festiva..",
+    description: "Comedy show",
     date: "date",
     bannerUrl: "assets/events/event3.png",
   ),
   EventModel(
-    title: "Sarkar",
-    description: "description",
+    title: "Happy Halloween 2K19",
+    description: "Music show",
     bannerUrl: "assets/events/event4.png",
     date: "date",
   ),
@@ -80,26 +106,26 @@ List<EventModel> events = [
 
 List<EventModel> plays = [
   EventModel(
-    title: "Bigil",
-    description: "description",
+    title: "Alex in wonderland",
+    description: "Comedy Show",
     date: "date",
     bannerUrl: "assets/plays/play1.png",
   ),
   EventModel(
-    title: "Kaithi",
-    description: "description",
+    title: "Marry poppins puffet show",
+    description: "Music Show",
     date: "date",
     bannerUrl: "assets/plays/play2.png",
   ),
   EventModel(
-    title: "Asuran",
-    description: "description",
+    title: "Patrimandram special dewali",
+    description: "Dibet Show",
     date: "date",
     bannerUrl: "assets/plays/play3.png",
   ),
   EventModel(
-    title: "Sarkar",
-    description: "description",
+    title: "Happy Halloween 2K19",
+    description: "Music Show",
     bannerUrl: "assets/plays/play4.png",
     date: "date",
   ),
@@ -111,4 +137,31 @@ List<String> cities = [
   "Kolkata",
   "Chennai",
   "Lucknow",
+];
+
+List<CrewCastModel> crewCast = [
+  CrewCastModel(
+    movieId: "123",
+    castId: "123",
+    name: "Chadwick",
+    image: "assets/actors/chadwick.png",
+  ),
+  CrewCastModel(
+    movieId: "123",
+    castId: "123",
+    name: "Letitia Wright",
+    image: "assets/actors/LetitiaWright.png",
+  ),
+  CrewCastModel(
+    movieId: "123",
+    castId: "123",
+    name: "B. Jordan",
+    image: "assets/actors/b_jordan.png",
+  ),
+  CrewCastModel(
+    movieId: "123",
+    castId: "123",
+    name: "Lupita Nyong",
+    image: "assets/actors/lupita_nyong.png",
+  ),
 ];

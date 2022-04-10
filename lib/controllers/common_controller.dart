@@ -10,7 +10,10 @@ class CommonController extends GetxController with GetSingleTickerProviderStateM
 
   @override
   void onInit() {
-    tabController = TabController(length: tabList.length, vsync: this, initialIndex: 0);
+    tabController = TabController(
+        length: tabList.length, vsync: this, initialIndex: 0, animationDuration: const Duration(milliseconds: 300));
+    print(tabController.index);
+    tabController.animateTo(0);
     tabs = tabList.map((e) => Tab(text: e)).toList();
     super.onInit();
   }
@@ -18,6 +21,7 @@ class CommonController extends GetxController with GetSingleTickerProviderStateM
   @override
   void dispose() {
     pageController.dispose();
+    tabController.dispose();
 
     super.dispose();
   }
@@ -26,5 +30,6 @@ class CommonController extends GetxController with GetSingleTickerProviderStateM
 
   updatePage(int index) async {
     pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    tabController.animateTo(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 }

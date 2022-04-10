@@ -39,80 +39,88 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "${menu.name} in ${LocationController.instance.city}",
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: MySearchDelegate(list: list, isMovie: menu.name.toLowerCase().contains("movies")),
-              );
-            },
-            icon: SvgPicture.asset("assets/icons/search.svg"),
+    return WillPopScope(
+      onWillPop: () {
+        CommonController.instance.tabController.animateTo(0);
+        return Future.value(true);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "${menu.name} in ${LocationController.instance.city}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 1,
-            child: TabBar(
-              tabs: CommonController.instance.tabs,
-              controller: CommonController.instance.tabController,
-              indicator: const UnderlineTabIndicator(
-                borderSide: BorderSide(
-                  color: MyTheme.splash,
-                  width: 3,
-                ),
-                insets: EdgeInsets.all(15),
-              ),
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorWeight: 3,
-              labelStyle: selectedTextSyle,
-              unselectedLabelColor: Colors.black45,
-              labelColor: MyTheme.splash,
-              isScrollable: false,
-              enableFeedback: false,
-              onTap: (index) => CommonController.instance.updatePage(index),
-            ),
-          ),
-          Expanded(
-            flex: 8,
-            child: PageView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: CommonController.instance.pageController,
-              itemCount: 3,
-              itemBuilder: (_, index) {
-                return LayoutBuilder(builder: (context, constraint) {
-                  return GridView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: constraint.maxWidth > 480 ? 4 : 2,
-                      childAspectRatio: 0.8,
-                    ),
-                    itemBuilder: (_, index) {
-                      return ItemBlock(
-                        model: list[index],
-                        height: 180,
-                        width: 150,
-                        isMovie: menu.name.toLowerCase().contains("movies"),
-                      );
-                    },
-                    itemCount: list.length,
-                  );
-                });
+          elevation: 0,
+          actions: [
+            IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: MySearchDelegate(list: list, isMovie: menu.name.toLowerCase().contains("movies")),
+                );
               },
+              icon: SvgPicture.asset("assets/icons/search.svg"),
             ),
-          ),
-        ],
+          ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 1,
+              child: TabBar(
+                tabs: CommonController.instance.tabs,
+                controller: CommonController.instance.tabController,
+                indicator: const UnderlineTabIndicator(
+                  borderSide: BorderSide(
+                    color: MyTheme.splash,
+                    width: 3,
+                  ),
+                  insets: EdgeInsets.all(15),
+                ),
+                indicatorSize: TabBarIndicatorSize.label,
+                indicatorWeight: 3,
+                labelStyle: selectedTextSyle,
+                unselectedLabelColor: Colors.black45,
+                labelColor: MyTheme.splash,
+                isScrollable: false,
+                enableFeedback: false,
+                unselectedLabelStyle: normalTextSyle,
+                onTap: (index) => CommonController.instance.updatePage(index),
+              ),
+            ),
+            Expanded(
+              flex: 8,
+              child: PageView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: CommonController.instance.pageController,
+                itemCount: 3,
+                itemBuilder: (_, index) {
+                  return LayoutBuilder(builder: (context, constraint) {
+                    return GridView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: constraint.maxWidth > 480 ? 4 : 2,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemBuilder: (_, index) {
+                        return ItemBlock(
+                          model: list[index],
+                          height: 180,
+                          width: 150,
+                          isMovie: menu.name.toLowerCase().contains("movies"),
+                          onTap: (model) {},
+                        );
+                      },
+                      itemCount: list.length,
+                    );
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -131,6 +139,7 @@ class MySearchDelegate extends SearchDelegate<String> {
       height: 180,
       width: 150,
       isMovie: isMovie,
+      onTap: (model) {},
     );
   }
 

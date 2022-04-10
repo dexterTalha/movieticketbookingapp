@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movieticketbookingapp/pages/details_screen.dart';
 import 'package:movieticketbookingapp/utils/dummy_data.dart';
 import 'package:movieticketbookingapp/utils/mytheme.dart';
 import 'package:movieticketbookingapp/widgets/item_block.dart';
@@ -16,9 +18,15 @@ class MoviesItems extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: movies.length,
         itemBuilder: (_, i) {
-          return ItemBlock(
-            model: movies[i],
-            isMovie: true,
+          return Hero(
+            tag: "${movies[i].title}$i",
+            child: ItemBlock(
+              model: movies[i],
+              isMovie: true,
+              onTap: (model) {
+                Get.to(() => DetailsScreen(), arguments: [movies[i], i]);
+              },
+            ),
           );
         },
       ),

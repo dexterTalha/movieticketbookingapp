@@ -16,7 +16,10 @@ class EventItems extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: events.length,
         itemBuilder: (_, i) {
-          return ItemBlock(model: events[i]);
+          return ItemBlock(
+            model: events[i],
+            onTap: (model) {},
+          );
         },
       ),
     );

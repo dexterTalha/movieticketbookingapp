@@ -1,12 +1,19 @@
 import 'package:geocoding/geocoding.dart' as geo;
 import 'package:get/get.dart';
 import 'package:location/location.dart';
+import 'package:movieticketbookingapp/controllers/shared_pref.dart';
 import 'package:movieticketbookingapp/utils/dummy_data.dart';
 
 class LocationController extends GetxController {
-  RxString city = cities[0].obs;
+  late RxString city;
   RxBool isLocating = false.obs;
   static LocationController instance = Get.find();
+
+  @override
+  void onInit() async {
+    city = (await SharedPref.getLocation()).obs;
+    super.onInit();
+  }
 
   Future<void> getLocation() async {
     Location location = Location();
@@ -44,8 +51,9 @@ class LocationController extends GetxController {
     setCity(address[0].locality!);
   }
 
-  setCity(String myCity) {
+  setCity(String myCity) async {
     city = myCity.obs;
+    await SharedPref.storeLocation(myCity);
     update();
   }
 
