@@ -2,6 +2,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:movieticketbookingapp/model/movie_model.dart';
+import 'package:movieticketbookingapp/pages/list_cinema_screen.dart';
 import 'package:movieticketbookingapp/widgets/cast_crew_block.dart';
 import 'package:movieticketbookingapp/widgets/offers_block.dart';
 import 'package:movieticketbookingapp/widgets/review_block.dart';
@@ -184,7 +186,13 @@ class DetailsScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(
+              () => ListCinemaScreen(
+                model: model,
+              ),
+            );
+          },
           child: Container(
             width: double.maxFinite,
             height: 50,

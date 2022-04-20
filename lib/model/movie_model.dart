@@ -8,12 +8,17 @@ class MovieModel {
   final List<String> actors;
   final int like;
   final String bannerUrl;
+  final List<String> screens;
   MovieModel({
     required this.title,
     required this.description,
     required this.actors,
     required this.like,
     required this.bannerUrl,
+    this.screens = const [
+      "3D",
+      "2D",
+    ],
   });
 
   MovieModel copyWith({
@@ -22,6 +27,7 @@ class MovieModel {
     List<String>? actors,
     int? like,
     String? bannerUrl,
+    List<String>? screens,
   }) {
     return MovieModel(
       title: title ?? this.title,
@@ -29,6 +35,7 @@ class MovieModel {
       actors: actors ?? this.actors,
       like: like ?? this.like,
       bannerUrl: bannerUrl ?? this.bannerUrl,
+      screens: screens ?? this.screens,
     );
   }
 
@@ -39,6 +46,7 @@ class MovieModel {
       'actors': actors,
       'like': like,
       'bannerUrl': bannerUrl,
+      'screens': screens,
     };
   }
 
@@ -49,6 +57,7 @@ class MovieModel {
       actors: List<String>.from(map['actors']),
       like: map['like']?.toInt() ?? 0,
       bannerUrl: map['bannerUrl'] ?? '',
+      screens: List<String>.from(map['screens']),
     );
   }
 
@@ -58,7 +67,7 @@ class MovieModel {
 
   @override
   String toString() {
-    return 'MovieModel(title: $title, description: $description, actors: $actors, like: $like, bannerUrl: $bannerUrl)';
+    return 'MovieModel(title: $title, description: $description, actors: $actors, like: $like, bannerUrl: $bannerUrl, screens: $screens)';
   }
 
   @override
@@ -70,11 +79,17 @@ class MovieModel {
         other.description == description &&
         listEquals(other.actors, actors) &&
         other.like == like &&
-        other.bannerUrl == bannerUrl;
+        other.bannerUrl == bannerUrl &&
+        listEquals(other.screens, screens);
   }
 
   @override
   int get hashCode {
-    return title.hashCode ^ description.hashCode ^ actors.hashCode ^ like.hashCode ^ bannerUrl.hashCode;
+    return title.hashCode ^
+        description.hashCode ^
+        actors.hashCode ^
+        like.hashCode ^
+        bannerUrl.hashCode ^
+        screens.hashCode;
   }
 }

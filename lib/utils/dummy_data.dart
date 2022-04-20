@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:movieticketbookingapp/model/crew_cast_model.dart';
 import 'package:movieticketbookingapp/model/movie_model.dart';
 import 'package:movieticketbookingapp/model/offer_model.dart';
+import 'package:movieticketbookingapp/model/theatre_model.dart';
 import 'package:movieticketbookingapp/utils/mytheme.dart';
 import 'package:movieticketbookingapp/widgets/cast_crew_block.dart';
 
@@ -164,4 +166,23 @@ List<CrewCastModel> crewCast = [
     name: "Lupita Nyong",
     image: "assets/actors/lupita_nyong.png",
   ),
+];
+
+List<TheatreModel> theatres = [
+  TheatreModel(id: "123", name: "Arasan Cinemas A/C 2K Dolby"),
+  TheatreModel(id: "123", name: "INOX - Prozone mall"),
+  TheatreModel(id: "123", name: "Karpagam theatres - 4K Dolby Atoms"),
+  TheatreModel(id: "123", name: "KG theatres - 4K"),
+];
+
+List<String> facilityAsset = [
+  "assets/icons/cancel.svg",
+  "assets/icons/parking.svg",
+  "assets/icons/cutlery.svg",
+  "assets/icons/rocking_horse.svg",
+];
+
+List<String> screens = [
+  "3D",
+  "2D",
 ];
