@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:movieticketbookingapp/pages/seat_selection_screen.dart';
 import '../controllers/common_controller.dart';
+import '../controllers/seat_selection_controller.dart';
 import '../utils/screen_selection_block.dart';
 import '../utils/custom_calendar.dart';
 import '../controllers/calendar_controller.dart';
@@ -34,6 +36,7 @@ class _ListCinemaScreenState extends State<ListCinemaScreen> {
   @override
   void initState() {
     commonController = Get.put(CalendarController());
+    Get.put(SeatSelectionController());
     super.initState();
   }
 
@@ -142,7 +145,7 @@ class _ListCinemaScreenState extends State<ListCinemaScreen> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: TheatreSearchDelegate(),
+                  delegate: TheatreSearchDelegate(widget.model),
                 );
               },
               icon: SvgPicture.asset("assets/icons/search.svg"),
@@ -157,6 +160,9 @@ class _ListCinemaScreenState extends State<ListCinemaScreen> {
               padding: EdgeInsets.only(bottom: index != theatres.length - 1 ? 20 : 0),
               child: TheatreBlock(
                 model: theatres[index],
+                onTimeTap: (index) {
+                  Get.to(() => SeatSelectionScreen(theatreModel: theatres[index], movieModel: widget.model));
+                },
               ),
             );
           },
@@ -167,6 +173,9 @@ class _ListCinemaScreenState extends State<ListCinemaScreen> {
 }
 
 class TheatreSearchDelegate extends SearchDelegate {
+  final MovieModel model;
+  TheatreSearchDelegate(this.model);
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -211,6 +220,9 @@ class TheatreSearchDelegate extends SearchDelegate {
           padding: EdgeInsets.only(bottom: index != suggestionList.length - 1 ? 20 : 0),
           child: TheatreBlock(
             model: suggestionList[index],
+            onTimeTap: (index) {
+              Get.to(() => SeatSelectionScreen(theatreModel: suggestionList[index], movieModel: model));
+            },
           ),
         );
       },

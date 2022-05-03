@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
-import 'package:movieticketbookingapp/model/crew_cast_model.dart';
-import 'package:movieticketbookingapp/model/movie_model.dart';
-import 'package:movieticketbookingapp/model/offer_model.dart';
-import 'package:movieticketbookingapp/model/theatre_model.dart';
-import 'package:movieticketbookingapp/utils/mytheme.dart';
-import 'package:movieticketbookingapp/widgets/cast_crew_block.dart';
+import 'package:movieticketbookingapp/model/seat_layout_model.dart';
+
+import '../model/crew_cast_model.dart';
+import '../model/movie_model.dart';
+import '../model/offer_model.dart';
+import '../model/theatre_model.dart';
+import '../utils/mytheme.dart';
 
 import '../model/ad_slider_model.dart';
 import '../model/event_model.dart';
@@ -169,10 +169,10 @@ List<CrewCastModel> crewCast = [
 ];
 
 List<TheatreModel> theatres = [
-  TheatreModel(id: "123", name: "Arasan Cinemas A/C 2K Dolby"),
-  TheatreModel(id: "123", name: "INOX - Prozone mall"),
-  TheatreModel(id: "123", name: "Karpagam theatres - 4K Dolby Atoms"),
-  TheatreModel(id: "123", name: "KG theatres - 4K"),
+  TheatreModel(id: "1", name: "Arasan Cinemas A/C 2K Dolby"),
+  TheatreModel(id: "2", name: "INOX - Prozone mall"),
+  TheatreModel(id: "3", name: "Karpagam theatres - 4K Dolby Atoms"),
+  TheatreModel(id: "4", name: "KG theatres - 4K"),
 ];
 
 List<String> facilityAsset = [
@@ -186,3 +186,19 @@ List<String> screens = [
   "3D",
   "2D",
 ];
+
+final seatLayout = SeatLayoutModel(
+    rows: 10,
+    cols: 11,
+    seatTypes: [
+      {"title": "King", "price": 120, "status": "Filling Fast"},
+      {"title": "Queen", "price": 100, "status": "Available"},
+      {"title": "Jack", "price": 80, "status": "Available"},
+    ],
+    theatreId: 123,
+    gap: 2,
+    gapColIndex: 5,
+    isLastFilled: true,
+    rowBreaks: [5, 3, 2]);
+
+final List<int> s = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

@@ -75,8 +75,7 @@ class CustomCalendar extends StatelessWidget {
                 final DateFormat format = DateFormat("dd");
                 bool isSelected =
                     this.format.format(text) == this.format.format(calendarController.selectedMovieDate.value);
-                print("Selected Date: $isSelected" +
-                    " ${this.format.format(calendarController.selectedMovieDate.value)} ${this.format.format(text)}");
+                //print("Selected Date: $isSelected ${this.format.format(calendarController.selectedMovieDate.value)} ${this.format.format(text)}");
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: GestureDetector(

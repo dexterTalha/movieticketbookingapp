@@ -1,15 +1,11 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:movieticketbookingapp/model/movie_model.dart';
-import 'package:movieticketbookingapp/pages/list_cinema_screen.dart';
-import 'package:movieticketbookingapp/widgets/cast_crew_block.dart';
-import 'package:movieticketbookingapp/widgets/offers_block.dart';
-import 'package:movieticketbookingapp/widgets/review_block.dart';
-import '../utils/dummy_data.dart';
+import '../pages/list_cinema_screen.dart';
+import '../widgets/cast_crew_block.dart';
+import '../widgets/offers_block.dart';
+import '../widgets/review_block.dart';
 import '../utils/mytheme.dart';
-import '../widgets/item_block.dart';
 
 class DetailsScreen extends StatelessWidget {
   DetailsScreen({Key? key}) : super(key: key);
@@ -258,7 +254,7 @@ class DetailsScreen extends StatelessWidget {
             child: Container(
               color: const Color(0xFFF5F5FA),
               child: SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
