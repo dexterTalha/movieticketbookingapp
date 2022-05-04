@@ -7,7 +7,6 @@ import 'package:movieticketbookingapp/model/theatre_model.dart';
 import 'package:movieticketbookingapp/utils/dummy_data.dart';
 import 'package:movieticketbookingapp/utils/mytheme.dart';
 import 'package:movieticketbookingapp/widgets/no_of_seats.dart';
-import 'package:movieticketbookingapp/widgets/seat_layout.dart';
 import 'package:movieticketbookingapp/widgets/seat_type.dart';
 import 'package:movieticketbookingapp/widgets/theatre_block.dart';
 
