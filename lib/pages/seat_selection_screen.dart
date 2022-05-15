@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import 'package:movieticketbookingapp/controllers/seat_selection_controller.dart';
 import 'package:movieticketbookingapp/model/movie_model.dart';
 import 'package:movieticketbookingapp/model/theatre_model.dart';
-import 'package:movieticketbookingapp/utils/dummy_data.dart';
 import 'package:movieticketbookingapp/utils/mytheme.dart';
 import 'package:movieticketbookingapp/widgets/no_of_seats.dart';
+import 'package:movieticketbookingapp/widgets/seat_layout.dart';
 import 'package:movieticketbookingapp/widgets/seat_type.dart';
 import 'package:movieticketbookingapp/widgets/theatre_block.dart';
+
+import '../utils/dummy_data.dart';
 
 class SeatSelectionScreen extends StatefulWidget {
   final TheatreModel theatreModel;
@@ -66,30 +68,37 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
-          height: AppBar().preferredSize.height,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              primary: MyTheme.splash,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
-              ),
+  Widget bottomBar({required Function(bool) toggle}) {
+    return BottomAppBar(
+      child: SizedBox(
+        height: AppBar().preferredSize.height,
+        child: ElevatedButton(
+          onPressed: () {
+            print(SeatSelectionController.instance.isSeatSelection.value);
+            toggle(!SeatSelectionController.instance.isSeatSelection.value);
+          },
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: MyTheme.splash,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
             ),
-            child: const Center(
-              child: Text(
-                "Select Seats",
-                style: TextStyle(fontSize: 18),
-              ),
+          ),
+          child: const Center(
+            child: Text(
+              "Select Seats",
+              style: TextStyle(fontSize: 18),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: bottomBar(toggle: SeatSelectionController.instance.isSeatSelection),
       backgroundColor: const Color(0xFFF5F5FA),
       appBar: AppBar(
         elevation: 0,
@@ -107,22 +116,9 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
           const SizedBox(
             height: 15,
           ),
-
-          noOfSeatSelection(),
-          // Center(
-          //   child: SvgPicture.asset(
-          //     "assets/icons/screen_here.svg",
-          //   ),
-          // ),
-          // const Center(
-          //   child: Text("Screen Here"),
-          // ),
-          // const SizedBox(
-          //   height: 10,
-          // ),
-          // SeatLayout(
-          //   model: seatLayout,
-          // ),
+          Obx(() => SeatSelectionController.instance.isSeatSelection.value
+              ? SeatLayout(model: seatLayout)
+              : noOfSeatSelection()),
         ],
       ),
     );

@@ -6,6 +6,14 @@ class SeatSelectionController extends GetxController {
   static int initialValue = -1;
   RxInt noOfSeats = initialValue.obs;
   RxInt seatType = initialValue.obs;
+  RxBool isSeatSelection = false.obs;
+
+  @override
+  void onReady() {
+    super.onReady();
+    noOfSeats = initialValue.obs;
+    seatType = initialValue.obs;
+  }
 
   String getAsset() {
     int val = noOfSeats.value;
