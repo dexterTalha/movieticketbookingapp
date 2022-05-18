@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:movieticketbookingapp/controllers/auth_controller.dart';
 import 'package:movieticketbookingapp/controllers/seat_selection_controller.dart';
 import 'package:movieticketbookingapp/model/movie_model.dart';
 import 'package:movieticketbookingapp/model/theatre_model.dart';
@@ -74,8 +75,21 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
         height: AppBar().preferredSize.height,
         child: ElevatedButton(
           onPressed: () {
-            print(SeatSelectionController.instance.isSeatSelection.value);
-            toggle(!SeatSelectionController.instance.isSeatSelection.value);
+            //print(SeatSelectionController.instance.isSeatSelection.value);
+
+            if (SeatSelectionController.instance.isSeatSelection.value) {
+              if (SeatSelectionController.instance.seatPrice <= 0.0) {
+                AuthController.instance.getErrorSnackBarNew("Please select atleast one seat");
+                return;
+              }
+              SeatSelectionController.instance.createOrder();
+            } else {
+              if (SeatSelectionController.instance.noOfSeats.value <= 0) {
+                AuthController.instance.getErrorSnackBarNew("Please select number of seats");
+                return;
+              }
+              toggle(true);
+            }
           },
           style: ElevatedButton.styleFrom(
             elevation: 0,
@@ -84,14 +98,41 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
               borderRadius: BorderRadius.zero,
             ),
           ),
-          child: const Center(
-            child: Text(
-              "Select Seats",
-              style: TextStyle(fontSize: 18),
+          child: Obx(
+            () => Center(
+              child: Text(
+                SeatSelectionController.instance.isSeatSelection.value
+                    ? "Pay ${SeatSelectionController.instance.seatPrice.value}"
+                    : "Select Seats",
+                style: const TextStyle(fontSize: 18),
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  PreferredSizeWidget myAppBar({required Function(bool) toggle}) {
+    return AppBar(
+      elevation: 0,
+      title: Text(widget.movieModel.title),
+      actions: [
+        TextButton(
+          onPressed: () {
+            toggle(false);
+            SeatSelectionController.instance.selectedSeats = [].obs;
+            SeatSelectionController.instance.seatPrice = 0.0.obs;
+            SeatSelectionController.instance.seatPrices = [].obs;
+          },
+          child: Obx(
+            () => Text(
+              "${SeatSelectionController.instance.noOfSeats < 0 ? 0 : SeatSelectionController.instance.noOfSeats} Seats",
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -100,11 +141,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
     return Scaffold(
       bottomNavigationBar: bottomBar(toggle: SeatSelectionController.instance.isSeatSelection),
       backgroundColor: const Color(0xFFF5F5FA),
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(widget.movieModel.title),
-        actions: [],
-      ),
+      appBar: myAppBar(toggle: SeatSelectionController.instance.isSeatSelection),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -191,9 +191,9 @@ final seatLayout = SeatLayoutModel(
     rows: 10,
     cols: 11,
     seatTypes: [
-      {"title": "King", "price": 120, "status": "Filling Fast"},
-      {"title": "Queen", "price": 100, "status": "Available"},
-      {"title": "Jack", "price": 80, "status": "Available"},
+      {"title": "King", "price": 120.0, "status": "Filling Fast"},
+      {"title": "Queen", "price": 100.0, "status": "Available"},
+      {"title": "Jack", "price": 80.0, "status": "Available"},
     ],
     theatreId: 123,
     gap: 2,
