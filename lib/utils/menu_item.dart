@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:movieticketbookingapp/pages/view_all_screen.dart';
-import 'package:movieticketbookingapp/utils/dummy_data.dart';
+import '../pages/view_all_screen.dart';
+import '../utils/dummy_data.dart';
 
-class MenuItem extends StatelessWidget {
-  const MenuItem({Key? key}) : super(key: key);
+class MyMenuItem extends StatelessWidget {
+  const MyMenuItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'package:movieticketbookingapp/controllers/location_controller.dart';
-import 'package:movieticketbookingapp/utils/dummy_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
@@ -11,7 +10,10 @@ class SharedPref {
 
   static Future<String> getLocation() async {
     pref = await SharedPreferences.getInstance();
-    String city = pref.getString("location")!;
+    String city = "NA";
+    try {
+      city = pref.getString("location")!;
+    } catch (e) {}
     LocationController.instance.setCity(city);
     return city;
   }
